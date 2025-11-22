@@ -73,6 +73,6 @@ INNER JOIN
 AGGREGATE FUNCTIONS
 
 📝 Author
-Anushka Unhalkar
+Shantanu Shinde
 Python & MySQL Mini-Project
 2025
