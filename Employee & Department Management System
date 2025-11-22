@@ -1,0 +1,930 @@
+MySQL MINI PROJECT
+================
+
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| college            |
+| college_db         |
+| company_db         |
+| companydb          |
+| employee_db        |
+| information_schema |
+| mysql              |
+| office             |
+| performance_schema |
+| school             |
+| school_db          |
+| schooldb           |
+| sys                |
+| test_db            |
++--------------------+
+14 rows in set (0.01 sec)
+
+mysql> DROP DATABASE office;
+Query OK, 6 rows affected (0.16 sec)
+
+mysql> CREATE DATABASE IF NOT EXISTS office;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE office;
+Database changed
+mysql> DROP TABLE IF EXISTS departments;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql>
+mysql> CREATE TABLE departments (
+    ->     dept_id INT PRIMARY KEY,
+    ->     dept_name VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> INSERT INTO departments VALUES
+    -> (1, 'HR'),
+    -> (2, 'IT'),
+    -> (3, 'Finance'),
+    -> (4, 'Sales'),
+    -> (5, 'Admin');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> DROP TABLE IF EXISTS employees;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql>
+mysql> CREATE TABLE employees (
+    ->     emp_id INT PRIMARY KEY,
+    ->     emp_name VARCHAR(50),
+    ->     dept_id INT,
+    ->     salary INT,
+    ->     hire_date DATE,
+    ->     FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> INSERT INTO employees VALUES
+    -> (1,'Amit Sharma',1,45000,'2021-06-12'),
+    -> (2,'Riya Mehta',2,60000,'2020-03-21'),
+    -> (3,'Arjun Patel',3,75000,'2019-09-15'),
+    -> (4,'Priya Singh',2,52000,'2022-01-11'),
+    -> (5,'Rahul Gupta',3,30000,'2023-04-10'),
+    -> (6,'Anil Johnson',4,48000,'2021-12-09'),
+    -> (7,'Sneha Kaur',1,38000,'2020-07-07'),
+    -> (8,'Alex Wilson',5,67000,'2018-02-20'),
+    -> (9,'John Mathew',2,55000,'2020-10-01'),
+    -> (10,'Sonali Samson',4,43000,'2023-05-24'),
+    -> (11,'Meera Nair',1,42000,'2021-02-18'),
+    -> (12,'Vikas Pandey',2,61000,'2020-05-30'),
+    -> (13,'Shreya Kulkarni',3,47000,'2022-03-19'),
+    -> (14,'Rohan Desai',4,39000,'2021-08-11'),
+    -> (15,'Kunal Thakur',5,72000,'2019-11-09'),
+    -> (16,'Monika Rana',1,51000,'2022-07-20'),
+    -> (17,'Suresh Rao',2,58000,'2020-12-31'),
+    -> (18,'Deepak Mishra',3,68000,'2018-10-05'),
+    -> (19,'Tina Kapoor',4,36000,'2023-01-12'),
+    -> (20,'Sam Thomas',5,75000,'2017-09-28'),
+    -> (21,'Nisha Jain',1,41000,'2021-04-16'),
+    -> (22,'Farhan Khan',2,62000,'2020-06-08'),
+    -> (23,'Devika Pillai',3,50000,'2022-02-27'),
+    -> (24,'Harsh Vardhan',4,38000,'2021-11-13'),
+    -> (25,'Lata More',5,69000,'2019-05-14'),
+    -> (26,'Gaurav Singh',1,44000,'2021-07-01'),
+    -> (27,'Ayesha Khan',2,63000,'2020-08-17'),
+    -> (28,'Pratik Joshi',3,55000,'2022-04-09'),
+    -> (29,'Kevin Dsouza',4,42000,'2021-12-22'),
+    -> (30,'Diana Noronha',5,71000,'2018-03-05'),
+    -> (31,'Sanjay Verma',1,47000,'2020-09-10'),
+    -> (32,'Zoya Shaikh',2,64000,'2020-11-29'),
+    -> (33,'Abhishek Jain',3,59000,'2022-05-13'),
+    -> (34,'Chirag Shah',4,39000,'2021-08-30'),
+    -> (35,'Reema Paul',5,68000,'2019-10-18'),
+    -> (36,'Irfan Ali',1,53000,'2022-03-01'),
+    -> (37,'Harleen Kaur',2,57000,'2020-10-25'),
+    -> (38,'Vivek Menon',3,61000,'2018-04-02'),
+    -> (39,'Juhi Chawla',4,40000,'2023-02-19'),
+    -> (40,'Roshan Kumar',5,74000,'2017-11-11'),
+    -> (41,'Pooja Sharma',1,46000,'2021-05-21'),
+    -> (42,'Manoj Patil',2,65000,'2020-09-19'),
+    -> (43,'Snehal Deshmukh',3,52000,'2022-06-10'),
+    -> (44,'Arvind Shetty',4,41000,'2021-01-28'),
+    -> (45,'Catherine Dias',5,70000,'2018-06-14'),
+    -> (46,'Siddharth Malhotra',1,48000,'2021-03-12'),
+    -> (47,'Sana Parvez',2,66000,'2020-04-29'),
+    -> (48,'Karan Gupta',3,54000,'2022-07-03'),
+    -> (49,'Rashmi Rawat',4,37000,'2023-03-22'),
+    -> (50,'Bryan Lewis',5,76000,'2017-08-08');
+Query OK, 50 rows affected (0.01 sec)
+Records: 50  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM employees;
++--------+--------------------+---------+--------+------------+
+| emp_id | emp_name           | dept_id | salary | hire_date  |
++--------+--------------------+---------+--------+------------+
+|      1 | Amit Sharma        |       1 |  45000 | 2021-06-12 |
+|      2 | Riya Mehta         |       2 |  60000 | 2020-03-21 |
+|      3 | Arjun Patel        |       3 |  75000 | 2019-09-15 |
+|      4 | Priya Singh        |       2 |  52000 | 2022-01-11 |
+|      5 | Rahul Gupta        |       3 |  30000 | 2023-04-10 |
+|      6 | Anil Johnson       |       4 |  48000 | 2021-12-09 |
+|      7 | Sneha Kaur         |       1 |  38000 | 2020-07-07 |
+|      8 | Alex Wilson        |       5 |  67000 | 2018-02-20 |
+|      9 | John Mathew        |       2 |  55000 | 2020-10-01 |
+|     10 | Sonali Samson      |       4 |  43000 | 2023-05-24 |
+|     11 | Meera Nair         |       1 |  42000 | 2021-02-18 |
+|     12 | Vikas Pandey       |       2 |  61000 | 2020-05-30 |
+|     13 | Shreya Kulkarni    |       3 |  47000 | 2022-03-19 |
+|     14 | Rohan Desai        |       4 |  39000 | 2021-08-11 |
+|     15 | Kunal Thakur       |       5 |  72000 | 2019-11-09 |
+|     16 | Monika Rana        |       1 |  51000 | 2022-07-20 |
+|     17 | Suresh Rao         |       2 |  58000 | 2020-12-31 |
+|     18 | Deepak Mishra      |       3 |  68000 | 2018-10-05 |
+|     19 | Tina Kapoor        |       4 |  36000 | 2023-01-12 |
+|     20 | Sam Thomas         |       5 |  75000 | 2017-09-28 |
+|     21 | Nisha Jain         |       1 |  41000 | 2021-04-16 |
+|     22 | Farhan Khan        |       2 |  62000 | 2020-06-08 |
+|     23 | Devika Pillai      |       3 |  50000 | 2022-02-27 |
+|     24 | Harsh Vardhan      |       4 |  38000 | 2021-11-13 |
+|     25 | Lata More          |       5 |  69000 | 2019-05-14 |
+|     26 | Gaurav Singh       |       1 |  44000 | 2021-07-01 |
+|     27 | Ayesha Khan        |       2 |  63000 | 2020-08-17 |
+|     28 | Pratik Joshi       |       3 |  55000 | 2022-04-09 |
+|     29 | Kevin Dsouza       |       4 |  42000 | 2021-12-22 |
+|     30 | Diana Noronha      |       5 |  71000 | 2018-03-05 |
+|     31 | Sanjay Verma       |       1 |  47000 | 2020-09-10 |
+|     32 | Zoya Shaikh        |       2 |  64000 | 2020-11-29 |
+|     33 | Abhishek Jain      |       3 |  59000 | 2022-05-13 |
+|     34 | Chirag Shah        |       4 |  39000 | 2021-08-30 |
+|     35 | Reema Paul         |       5 |  68000 | 2019-10-18 |
+|     36 | Irfan Ali          |       1 |  53000 | 2022-03-01 |
+|     37 | Harleen Kaur       |       2 |  57000 | 2020-10-25 |
+|     38 | Vivek Menon        |       3 |  61000 | 2018-04-02 |
+|     39 | Juhi Chawla        |       4 |  40000 | 2023-02-19 |
+|     40 | Roshan Kumar       |       5 |  74000 | 2017-11-11 |
+|     41 | Pooja Sharma       |       1 |  46000 | 2021-05-21 |
+|     42 | Manoj Patil        |       2 |  65000 | 2020-09-19 |
+|     43 | Snehal Deshmukh    |       3 |  52000 | 2022-06-10 |
+|     44 | Arvind Shetty      |       4 |  41000 | 2021-01-28 |
+|     45 | Catherine Dias     |       5 |  70000 | 2018-06-14 |
+|     46 | Siddharth Malhotra |       1 |  48000 | 2021-03-12 |
+|     47 | Sana Parvez        |       2 |  66000 | 2020-04-29 |
+|     48 | Karan Gupta        |       3 |  54000 | 2022-07-03 |
+|     49 | Rashmi Rawat       |       4 |  37000 | 2023-03-22 |
+|     50 | Bryan Lewis        |       5 |  76000 | 2017-08-08 |
++--------+--------------------+---------+--------+------------+
+50 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees
+    -> WHERE dept_id = 1 AND salary > 40000;
++--------+--------------------+---------+--------+------------+
+| emp_id | emp_name           | dept_id | salary | hire_date  |
++--------+--------------------+---------+--------+------------+
+|      1 | Amit Sharma        |       1 |  45000 | 2021-06-12 |
+|     11 | Meera Nair         |       1 |  42000 | 2021-02-18 |
+|     16 | Monika Rana        |       1 |  51000 | 2022-07-20 |
+|     21 | Nisha Jain         |       1 |  41000 | 2021-04-16 |
+|     26 | Gaurav Singh       |       1 |  44000 | 2021-07-01 |
+|     31 | Sanjay Verma       |       1 |  47000 | 2020-09-10 |
+|     36 | Irfan Ali          |       1 |  53000 | 2022-03-01 |
+|     41 | Pooja Sharma       |       1 |  46000 | 2021-05-21 |
+|     46 | Siddharth Malhotra |       1 |  48000 | 2021-03-12 |
++--------+--------------------+---------+--------+------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees
+    -> WHERE dept_id = 2 OR dept_id = 3;
++--------+-----------------+---------+--------+------------+
+| emp_id | emp_name        | dept_id | salary | hire_date  |
++--------+-----------------+---------+--------+------------+
+|      2 | Riya Mehta      |       2 |  60000 | 2020-03-21 |
+|      3 | Arjun Patel     |       3 |  75000 | 2019-09-15 |
+|      4 | Priya Singh     |       2 |  52000 | 2022-01-11 |
+|      5 | Rahul Gupta     |       3 |  30000 | 2023-04-10 |
+|      9 | John Mathew     |       2 |  55000 | 2020-10-01 |
+|     12 | Vikas Pandey    |       2 |  61000 | 2020-05-30 |
+|     13 | Shreya Kulkarni |       3 |  47000 | 2022-03-19 |
+|     17 | Suresh Rao      |       2 |  58000 | 2020-12-31 |
+|     18 | Deepak Mishra   |       3 |  68000 | 2018-10-05 |
+|     22 | Farhan Khan     |       2 |  62000 | 2020-06-08 |
+|     23 | Devika Pillai   |       3 |  50000 | 2022-02-27 |
+|     27 | Ayesha Khan     |       2 |  63000 | 2020-08-17 |
+|     28 | Pratik Joshi    |       3 |  55000 | 2022-04-09 |
+|     32 | Zoya Shaikh     |       2 |  64000 | 2020-11-29 |
+|     33 | Abhishek Jain   |       3 |  59000 | 2022-05-13 |
+|     37 | Harleen Kaur    |       2 |  57000 | 2020-10-25 |
+|     38 | Vivek Menon     |       3 |  61000 | 2018-04-02 |
+|     42 | Manoj Patil     |       2 |  65000 | 2020-09-19 |
+|     43 | Snehal Deshmukh |       3 |  52000 | 2022-06-10 |
+|     47 | Sana Parvez     |       2 |  66000 | 2020-04-29 |
+|     48 | Karan Gupta     |       3 |  54000 | 2022-07-03 |
++--------+-----------------+---------+--------+------------+
+21 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees
+    -> WHERE dept_id <> 4;
++--------+--------------------+---------+--------+------------+
+| emp_id | emp_name           | dept_id | salary | hire_date  |
++--------+--------------------+---------+--------+------------+
+|      1 | Amit Sharma        |       1 |  45000 | 2021-06-12 |
+|      2 | Riya Mehta         |       2 |  60000 | 2020-03-21 |
+|      3 | Arjun Patel        |       3 |  75000 | 2019-09-15 |
+|      4 | Priya Singh        |       2 |  52000 | 2022-01-11 |
+|      5 | Rahul Gupta        |       3 |  30000 | 2023-04-10 |
+|      7 | Sneha Kaur         |       1 |  38000 | 2020-07-07 |
+|      8 | Alex Wilson        |       5 |  67000 | 2018-02-20 |
+|      9 | John Mathew        |       2 |  55000 | 2020-10-01 |
+|     11 | Meera Nair         |       1 |  42000 | 2021-02-18 |
+|     12 | Vikas Pandey       |       2 |  61000 | 2020-05-30 |
+|     13 | Shreya Kulkarni    |       3 |  47000 | 2022-03-19 |
+|     15 | Kunal Thakur       |       5 |  72000 | 2019-11-09 |
+|     16 | Monika Rana        |       1 |  51000 | 2022-07-20 |
+|     17 | Suresh Rao         |       2 |  58000 | 2020-12-31 |
+|     18 | Deepak Mishra      |       3 |  68000 | 2018-10-05 |
+|     20 | Sam Thomas         |       5 |  75000 | 2017-09-28 |
+|     21 | Nisha Jain         |       1 |  41000 | 2021-04-16 |
+|     22 | Farhan Khan        |       2 |  62000 | 2020-06-08 |
+|     23 | Devika Pillai      |       3 |  50000 | 2022-02-27 |
+|     25 | Lata More          |       5 |  69000 | 2019-05-14 |
+|     26 | Gaurav Singh       |       1 |  44000 | 2021-07-01 |
+|     27 | Ayesha Khan        |       2 |  63000 | 2020-08-17 |
+|     28 | Pratik Joshi       |       3 |  55000 | 2022-04-09 |
+|     30 | Diana Noronha      |       5 |  71000 | 2018-03-05 |
+|     31 | Sanjay Verma       |       1 |  47000 | 2020-09-10 |
+|     32 | Zoya Shaikh        |       2 |  64000 | 2020-11-29 |
+|     33 | Abhishek Jain      |       3 |  59000 | 2022-05-13 |
+|     35 | Reema Paul         |       5 |  68000 | 2019-10-18 |
+|     36 | Irfan Ali          |       1 |  53000 | 2022-03-01 |
+|     37 | Harleen Kaur       |       2 |  57000 | 2020-10-25 |
+|     38 | Vivek Menon        |       3 |  61000 | 2018-04-02 |
+|     40 | Roshan Kumar       |       5 |  74000 | 2017-11-11 |
+|     41 | Pooja Sharma       |       1 |  46000 | 2021-05-21 |
+|     42 | Manoj Patil        |       2 |  65000 | 2020-09-19 |
+|     43 | Snehal Deshmukh    |       3 |  52000 | 2022-06-10 |
+|     45 | Catherine Dias     |       5 |  70000 | 2018-06-14 |
+|     46 | Siddharth Malhotra |       1 |  48000 | 2021-03-12 |
+|     47 | Sana Parvez        |       2 |  66000 | 2020-04-29 |
+|     48 | Karan Gupta        |       3 |  54000 | 2022-07-03 |
+|     50 | Bryan Lewis        |       5 |  76000 | 2017-08-08 |
++--------+--------------------+---------+--------+------------+
+40 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees
+    -> WHERE dept_id IN (1, 2, 5);
++--------+--------------------+---------+--------+------------+
+| emp_id | emp_name           | dept_id | salary | hire_date  |
++--------+--------------------+---------+--------+------------+
+|      1 | Amit Sharma        |       1 |  45000 | 2021-06-12 |
+|      2 | Riya Mehta         |       2 |  60000 | 2020-03-21 |
+|      4 | Priya Singh        |       2 |  52000 | 2022-01-11 |
+|      7 | Sneha Kaur         |       1 |  38000 | 2020-07-07 |
+|      8 | Alex Wilson        |       5 |  67000 | 2018-02-20 |
+|      9 | John Mathew        |       2 |  55000 | 2020-10-01 |
+|     11 | Meera Nair         |       1 |  42000 | 2021-02-18 |
+|     12 | Vikas Pandey       |       2 |  61000 | 2020-05-30 |
+|     15 | Kunal Thakur       |       5 |  72000 | 2019-11-09 |
+|     16 | Monika Rana        |       1 |  51000 | 2022-07-20 |
+|     17 | Suresh Rao         |       2 |  58000 | 2020-12-31 |
+|     20 | Sam Thomas         |       5 |  75000 | 2017-09-28 |
+|     21 | Nisha Jain         |       1 |  41000 | 2021-04-16 |
+|     22 | Farhan Khan        |       2 |  62000 | 2020-06-08 |
+|     25 | Lata More          |       5 |  69000 | 2019-05-14 |
+|     26 | Gaurav Singh       |       1 |  44000 | 2021-07-01 |
+|     27 | Ayesha Khan        |       2 |  63000 | 2020-08-17 |
+|     30 | Diana Noronha      |       5 |  71000 | 2018-03-05 |
+|     31 | Sanjay Verma       |       1 |  47000 | 2020-09-10 |
+|     32 | Zoya Shaikh        |       2 |  64000 | 2020-11-29 |
+|     35 | Reema Paul         |       5 |  68000 | 2019-10-18 |
+|     36 | Irfan Ali          |       1 |  53000 | 2022-03-01 |
+|     37 | Harleen Kaur       |       2 |  57000 | 2020-10-25 |
+|     40 | Roshan Kumar       |       5 |  74000 | 2017-11-11 |
+|     41 | Pooja Sharma       |       1 |  46000 | 2021-05-21 |
+|     42 | Manoj Patil        |       2 |  65000 | 2020-09-19 |
+|     45 | Catherine Dias     |       5 |  70000 | 2018-06-14 |
+|     46 | Siddharth Malhotra |       1 |  48000 | 2021-03-12 |
+|     47 | Sana Parvez        |       2 |  66000 | 2020-04-29 |
+|     50 | Bryan Lewis        |       5 |  76000 | 2017-08-08 |
++--------+--------------------+---------+--------+------------+
+30 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees
+    -> WHERE salary BETWEEN 30000 AND 60000;
++--------+--------------------+---------+--------+------------+
+| emp_id | emp_name           | dept_id | salary | hire_date  |
++--------+--------------------+---------+--------+------------+
+|      1 | Amit Sharma        |       1 |  45000 | 2021-06-12 |
+|      2 | Riya Mehta         |       2 |  60000 | 2020-03-21 |
+|      4 | Priya Singh        |       2 |  52000 | 2022-01-11 |
+|      5 | Rahul Gupta        |       3 |  30000 | 2023-04-10 |
+|      6 | Anil Johnson       |       4 |  48000 | 2021-12-09 |
+|      7 | Sneha Kaur         |       1 |  38000 | 2020-07-07 |
+|      9 | John Mathew        |       2 |  55000 | 2020-10-01 |
+|     10 | Sonali Samson      |       4 |  43000 | 2023-05-24 |
+|     11 | Meera Nair         |       1 |  42000 | 2021-02-18 |
+|     13 | Shreya Kulkarni    |       3 |  47000 | 2022-03-19 |
+|     14 | Rohan Desai        |       4 |  39000 | 2021-08-11 |
+|     16 | Monika Rana        |       1 |  51000 | 2022-07-20 |
+|     17 | Suresh Rao         |       2 |  58000 | 2020-12-31 |
+|     19 | Tina Kapoor        |       4 |  36000 | 2023-01-12 |
+|     21 | Nisha Jain         |       1 |  41000 | 2021-04-16 |
+|     23 | Devika Pillai      |       3 |  50000 | 2022-02-27 |
+|     24 | Harsh Vardhan      |       4 |  38000 | 2021-11-13 |
+|     26 | Gaurav Singh       |       1 |  44000 | 2021-07-01 |
+|     28 | Pratik Joshi       |       3 |  55000 | 2022-04-09 |
+|     29 | Kevin Dsouza       |       4 |  42000 | 2021-12-22 |
+|     31 | Sanjay Verma       |       1 |  47000 | 2020-09-10 |
+|     33 | Abhishek Jain      |       3 |  59000 | 2022-05-13 |
+|     34 | Chirag Shah        |       4 |  39000 | 2021-08-30 |
+|     36 | Irfan Ali          |       1 |  53000 | 2022-03-01 |
+|     37 | Harleen Kaur       |       2 |  57000 | 2020-10-25 |
+|     39 | Juhi Chawla        |       4 |  40000 | 2023-02-19 |
+|     41 | Pooja Sharma       |       1 |  46000 | 2021-05-21 |
+|     43 | Snehal Deshmukh    |       3 |  52000 | 2022-06-10 |
+|     44 | Arvind Shetty      |       4 |  41000 | 2021-01-28 |
+|     46 | Siddharth Malhotra |       1 |  48000 | 2021-03-12 |
+|     48 | Karan Gupta        |       3 |  54000 | 2022-07-03 |
+|     49 | Rashmi Rawat       |       4 |  37000 | 2023-03-22 |
++--------+--------------------+---------+--------+------------+
+32 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees
+    -> WHERE emp_name LIKE 'A%';
++--------+---------------+---------+--------+------------+
+| emp_id | emp_name      | dept_id | salary | hire_date  |
++--------+---------------+---------+--------+------------+
+|      1 | Amit Sharma   |       1 |  45000 | 2021-06-12 |
+|      3 | Arjun Patel   |       3 |  75000 | 2019-09-15 |
+|      6 | Anil Johnson  |       4 |  48000 | 2021-12-09 |
+|      8 | Alex Wilson   |       5 |  67000 | 2018-02-20 |
+|     27 | Ayesha Khan   |       2 |  63000 | 2020-08-17 |
+|     33 | Abhishek Jain |       3 |  59000 | 2022-05-13 |
+|     44 | Arvind Shetty |       4 |  41000 | 2021-01-28 |
++--------+---------------+---------+--------+------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees
+    -> WHERE emp_name LIKE '%son%';
++--------+---------------+---------+--------+------------+
+| emp_id | emp_name      | dept_id | salary | hire_date  |
++--------+---------------+---------+--------+------------+
+|      6 | Anil Johnson  |       4 |  48000 | 2021-12-09 |
+|      8 | Alex Wilson   |       5 |  67000 | 2018-02-20 |
+|     10 | Sonali Samson |       4 |  43000 | 2023-05-24 |
++--------+---------------+---------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(*) AS total_employees FROM employees;
++-----------------+
+| total_employees |
++-----------------+
+|              50 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(salary) AS average_salary FROM employees;
++----------------+
+| average_salary |
++----------------+
+|     54280.0000 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(salary) AS highest_salary, MIN(salary) AS lowest_salary
+    -> FROM employees;
++----------------+---------------+
+| highest_salary | lowest_salary |
++----------------+---------------+
+|          76000 |         30000 |
++----------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(salary) AS total_salaries FROM employees;
++----------------+
+| total_salaries |
++----------------+
+|        2714000 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT dept_id, SUM(salary) AS total_salary
+    -> FROM employees
+    -> GROUP BY dept_id;
++---------+--------------+
+| dept_id | total_salary |
++---------+--------------+
+|       1 |       455000 |
+|       2 |       663000 |
+|       3 |       551000 |
+|       4 |       403000 |
+|       5 |       642000 |
++---------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT dept_id, COUNT(*) AS num_employees
+    -> FROM employees
+    -> GROUP BY dept_id
+    -> HAVING COUNT(*) > 5;
++---------+---------------+
+| dept_id | num_employees |
++---------+---------------+
+|       1 |            10 |
+|       2 |            11 |
+|       3 |            10 |
+|       4 |            10 |
+|       5 |             9 |
++---------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT dept_id, AVG(salary) AS avg_salary
+    -> FROM employees
+    -> GROUP BY dept_id
+    -> HAVING AVG(salary) > 50000;
++---------+------------+
+| dept_id | avg_salary |
++---------+------------+
+|       2 | 60272.7273 |
+|       3 | 55100.0000 |
+|       5 | 71333.3333 |
++---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT e.emp_name, d.dept_name, e.salary
+    -> FROM employees e
+    -> INNER JOIN departments d ON e.dept_id = d.dept_id;
++--------------------+-----------+--------+
+| emp_name           | dept_name | salary |
++--------------------+-----------+--------+
+| Amit Sharma        | HR        |  45000 |
+| Sneha Kaur         | HR        |  38000 |
+| Meera Nair         | HR        |  42000 |
+| Monika Rana        | HR        |  51000 |
+| Nisha Jain         | HR        |  41000 |
+| Gaurav Singh       | HR        |  44000 |
+| Sanjay Verma       | HR        |  47000 |
+| Irfan Ali          | HR        |  53000 |
+| Pooja Sharma       | HR        |  46000 |
+| Siddharth Malhotra | HR        |  48000 |
+| Riya Mehta         | IT        |  60000 |
+| Priya Singh        | IT        |  52000 |
+| John Mathew        | IT        |  55000 |
+| Vikas Pandey       | IT        |  61000 |
+| Suresh Rao         | IT        |  58000 |
+| Farhan Khan        | IT        |  62000 |
+| Ayesha Khan        | IT        |  63000 |
+| Zoya Shaikh        | IT        |  64000 |
+| Harleen Kaur       | IT        |  57000 |
+| Manoj Patil        | IT        |  65000 |
+| Sana Parvez        | IT        |  66000 |
+| Arjun Patel        | Finance   |  75000 |
+| Rahul Gupta        | Finance   |  30000 |
+| Shreya Kulkarni    | Finance   |  47000 |
+| Deepak Mishra      | Finance   |  68000 |
+| Devika Pillai      | Finance   |  50000 |
+| Pratik Joshi       | Finance   |  55000 |
+| Abhishek Jain      | Finance   |  59000 |
+| Vivek Menon        | Finance   |  61000 |
+| Snehal Deshmukh    | Finance   |  52000 |
+| Karan Gupta        | Finance   |  54000 |
+| Anil Johnson       | Sales     |  48000 |
+| Sonali Samson      | Sales     |  43000 |
+| Rohan Desai        | Sales     |  39000 |
+| Tina Kapoor        | Sales     |  36000 |
+| Harsh Vardhan      | Sales     |  38000 |
+| Kevin Dsouza       | Sales     |  42000 |
+| Chirag Shah        | Sales     |  39000 |
+| Juhi Chawla        | Sales     |  40000 |
+| Arvind Shetty      | Sales     |  41000 |
+| Rashmi Rawat       | Sales     |  37000 |
+| Alex Wilson        | Admin     |  67000 |
+| Kunal Thakur       | Admin     |  72000 |
+| Sam Thomas         | Admin     |  75000 |
+| Lata More          | Admin     |  69000 |
+| Diana Noronha      | Admin     |  71000 |
+| Reema Paul         | Admin     |  68000 |
+| Roshan Kumar       | Admin     |  74000 |
+| Catherine Dias     | Admin     |  70000 |
+| Bryan Lewis        | Admin     |  76000 |
++--------------------+-----------+--------+
+50 rows in set (0.00 sec)
+
+mysql> SELECT e.emp_name, d.dept_name
+    -> FROM employees e
+    -> LEFT JOIN departments d ON e.dept_id = d.dept_id;
++--------------------+-----------+
+| emp_name           | dept_name |
++--------------------+-----------+
+| Amit Sharma        | HR        |
+| Riya Mehta         | IT        |
+| Arjun Patel        | Finance   |
+| Priya Singh        | IT        |
+| Rahul Gupta        | Finance   |
+| Anil Johnson       | Sales     |
+| Sneha Kaur         | HR        |
+| Alex Wilson        | Admin     |
+| John Mathew        | IT        |
+| Sonali Samson      | Sales     |
+| Meera Nair         | HR        |
+| Vikas Pandey       | IT        |
+| Shreya Kulkarni    | Finance   |
+| Rohan Desai        | Sales     |
+| Kunal Thakur       | Admin     |
+| Monika Rana        | HR        |
+| Suresh Rao         | IT        |
+| Deepak Mishra      | Finance   |
+| Tina Kapoor        | Sales     |
+| Sam Thomas         | Admin     |
+| Nisha Jain         | HR        |
+| Farhan Khan        | IT        |
+| Devika Pillai      | Finance   |
+| Harsh Vardhan      | Sales     |
+| Lata More          | Admin     |
+| Gaurav Singh       | HR        |
+| Ayesha Khan        | IT        |
+| Pratik Joshi       | Finance   |
+| Kevin Dsouza       | Sales     |
+| Diana Noronha      | Admin     |
+| Sanjay Verma       | HR        |
+| Zoya Shaikh        | IT        |
+| Abhishek Jain      | Finance   |
+| Chirag Shah        | Sales     |
+| Reema Paul         | Admin     |
+| Irfan Ali          | HR        |
+| Harleen Kaur       | IT        |
+| Vivek Menon        | Finance   |
+| Juhi Chawla        | Sales     |
+| Roshan Kumar       | Admin     |
+| Pooja Sharma       | HR        |
+| Manoj Patil        | IT        |
+| Snehal Deshmukh    | Finance   |
+| Arvind Shetty      | Sales     |
+| Catherine Dias     | Admin     |
+| Siddharth Malhotra | HR        |
+| Sana Parvez        | IT        |
+| Karan Gupta        | Finance   |
+| Rashmi Rawat       | Sales     |
+| Bryan Lewis        | Admin     |
++--------------------+-----------+
+50 rows in set (0.00 sec)
+
+mysql> SELECT e.emp_name, d.dept_name
+    -> FROM employees e
+    -> RIGHT JOIN departments d ON e.dept_id = d.dept_id;
++--------------------+-----------+
+| emp_name           | dept_name |
++--------------------+-----------+
+| Amit Sharma        | HR        |
+| Sneha Kaur         | HR        |
+| Meera Nair         | HR        |
+| Monika Rana        | HR        |
+| Nisha Jain         | HR        |
+| Gaurav Singh       | HR        |
+| Sanjay Verma       | HR        |
+| Irfan Ali          | HR        |
+| Pooja Sharma       | HR        |
+| Siddharth Malhotra | HR        |
+| Riya Mehta         | IT        |
+| Priya Singh        | IT        |
+| John Mathew        | IT        |
+| Vikas Pandey       | IT        |
+| Suresh Rao         | IT        |
+| Farhan Khan        | IT        |
+| Ayesha Khan        | IT        |
+| Zoya Shaikh        | IT        |
+| Harleen Kaur       | IT        |
+| Manoj Patil        | IT        |
+| Sana Parvez        | IT        |
+| Arjun Patel        | Finance   |
+| Rahul Gupta        | Finance   |
+| Shreya Kulkarni    | Finance   |
+| Deepak Mishra      | Finance   |
+| Devika Pillai      | Finance   |
+| Pratik Joshi       | Finance   |
+| Abhishek Jain      | Finance   |
+| Vivek Menon        | Finance   |
+| Snehal Deshmukh    | Finance   |
+| Karan Gupta        | Finance   |
+| Anil Johnson       | Sales     |
+| Sonali Samson      | Sales     |
+| Rohan Desai        | Sales     |
+| Tina Kapoor        | Sales     |
+| Harsh Vardhan      | Sales     |
+| Kevin Dsouza       | Sales     |
+| Chirag Shah        | Sales     |
+| Juhi Chawla        | Sales     |
+| Arvind Shetty      | Sales     |
+| Rashmi Rawat       | Sales     |
+| Alex Wilson        | Admin     |
+| Kunal Thakur       | Admin     |
+| Sam Thomas         | Admin     |
+| Lata More          | Admin     |
+| Diana Noronha      | Admin     |
+| Reema Paul         | Admin     |
+| Roshan Kumar       | Admin     |
+| Catherine Dias     | Admin     |
+| Bryan Lewis        | Admin     |
++--------------------+-----------+
+50 rows in set (0.00 sec)
+
+mysql> SELECT e.emp_name, d.dept_name
+    -> FROM employees e
+    -> LEFT JOIN departments d ON e.dept_id = d.dept_id
+    ->
+    -> UNION
+    ->
+    -> SELECT e.emp_name, d.dept_name
+    -> FROM employees e
+    -> RIGHT JOIN departments d ON e.dept_id = d.dept_id;
++--------------------+-----------+
+| emp_name           | dept_name |
++--------------------+-----------+
+| Amit Sharma        | HR        |
+| Riya Mehta         | IT        |
+| Arjun Patel        | Finance   |
+| Priya Singh        | IT        |
+| Rahul Gupta        | Finance   |
+| Anil Johnson       | Sales     |
+| Sneha Kaur         | HR        |
+| Alex Wilson        | Admin     |
+| John Mathew        | IT        |
+| Sonali Samson      | Sales     |
+| Meera Nair         | HR        |
+| Vikas Pandey       | IT        |
+| Shreya Kulkarni    | Finance   |
+| Rohan Desai        | Sales     |
+| Kunal Thakur       | Admin     |
+| Monika Rana        | HR        |
+| Suresh Rao         | IT        |
+| Deepak Mishra      | Finance   |
+| Tina Kapoor        | Sales     |
+| Sam Thomas         | Admin     |
+| Nisha Jain         | HR        |
+| Farhan Khan        | IT        |
+| Devika Pillai      | Finance   |
+| Harsh Vardhan      | Sales     |
+| Lata More          | Admin     |
+| Gaurav Singh       | HR        |
+| Ayesha Khan        | IT        |
+| Pratik Joshi       | Finance   |
+| Kevin Dsouza       | Sales     |
+| Diana Noronha      | Admin     |
+| Sanjay Verma       | HR        |
+| Zoya Shaikh        | IT        |
+| Abhishek Jain      | Finance   |
+| Chirag Shah        | Sales     |
+| Reema Paul         | Admin     |
+| Irfan Ali          | HR        |
+| Harleen Kaur       | IT        |
+| Vivek Menon        | Finance   |
+| Juhi Chawla        | Sales     |
+| Roshan Kumar       | Admin     |
+| Pooja Sharma       | HR        |
+| Manoj Patil        | IT        |
+| Snehal Deshmukh    | Finance   |
+| Arvind Shetty      | Sales     |
+| Catherine Dias     | Admin     |
+| Siddharth Malhotra | HR        |
+| Sana Parvez        | IT        |
+| Karan Gupta        | Finance   |
+| Rashmi Rawat       | Sales     |
+| Bryan Lewis        | Admin     |
++--------------------+-----------+
+50 rows in set (0.01 sec)
+
+mysql> SELECT * FROM employees
+    -> WHERE salary > (SELECT AVG(salary) FROM employees);
++--------+----------------+---------+--------+------------+
+| emp_id | emp_name       | dept_id | salary | hire_date  |
++--------+----------------+---------+--------+------------+
+|      2 | Riya Mehta     |       2 |  60000 | 2020-03-21 |
+|      3 | Arjun Patel    |       3 |  75000 | 2019-09-15 |
+|      8 | Alex Wilson    |       5 |  67000 | 2018-02-20 |
+|      9 | John Mathew    |       2 |  55000 | 2020-10-01 |
+|     12 | Vikas Pandey   |       2 |  61000 | 2020-05-30 |
+|     15 | Kunal Thakur   |       5 |  72000 | 2019-11-09 |
+|     17 | Suresh Rao     |       2 |  58000 | 2020-12-31 |
+|     18 | Deepak Mishra  |       3 |  68000 | 2018-10-05 |
+|     20 | Sam Thomas     |       5 |  75000 | 2017-09-28 |
+|     22 | Farhan Khan    |       2 |  62000 | 2020-06-08 |
+|     25 | Lata More      |       5 |  69000 | 2019-05-14 |
+|     27 | Ayesha Khan    |       2 |  63000 | 2020-08-17 |
+|     28 | Pratik Joshi   |       3 |  55000 | 2022-04-09 |
+|     30 | Diana Noronha  |       5 |  71000 | 2018-03-05 |
+|     32 | Zoya Shaikh    |       2 |  64000 | 2020-11-29 |
+|     33 | Abhishek Jain  |       3 |  59000 | 2022-05-13 |
+|     35 | Reema Paul     |       5 |  68000 | 2019-10-18 |
+|     37 | Harleen Kaur   |       2 |  57000 | 2020-10-25 |
+|     38 | Vivek Menon    |       3 |  61000 | 2018-04-02 |
+|     40 | Roshan Kumar   |       5 |  74000 | 2017-11-11 |
+|     42 | Manoj Patil    |       2 |  65000 | 2020-09-19 |
+|     45 | Catherine Dias |       5 |  70000 | 2018-06-14 |
+|     47 | Sana Parvez    |       2 |  66000 | 2020-04-29 |
+|     50 | Bryan Lewis    |       5 |  76000 | 2017-08-08 |
++--------+----------------+---------+--------+------------+
+24 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees
+    -> WHERE salary >
+    ->     (SELECT salary FROM employees WHERE emp_name = 'John Mathew');
++--------+----------------+---------+--------+------------+
+| emp_id | emp_name       | dept_id | salary | hire_date  |
++--------+----------------+---------+--------+------------+
+|      2 | Riya Mehta     |       2 |  60000 | 2020-03-21 |
+|      3 | Arjun Patel    |       3 |  75000 | 2019-09-15 |
+|      8 | Alex Wilson    |       5 |  67000 | 2018-02-20 |
+|     12 | Vikas Pandey   |       2 |  61000 | 2020-05-30 |
+|     15 | Kunal Thakur   |       5 |  72000 | 2019-11-09 |
+|     17 | Suresh Rao     |       2 |  58000 | 2020-12-31 |
+|     18 | Deepak Mishra  |       3 |  68000 | 2018-10-05 |
+|     20 | Sam Thomas     |       5 |  75000 | 2017-09-28 |
+|     22 | Farhan Khan    |       2 |  62000 | 2020-06-08 |
+|     25 | Lata More      |       5 |  69000 | 2019-05-14 |
+|     27 | Ayesha Khan    |       2 |  63000 | 2020-08-17 |
+|     30 | Diana Noronha  |       5 |  71000 | 2018-03-05 |
+|     32 | Zoya Shaikh    |       2 |  64000 | 2020-11-29 |
+|     33 | Abhishek Jain  |       3 |  59000 | 2022-05-13 |
+|     35 | Reema Paul     |       5 |  68000 | 2019-10-18 |
+|     37 | Harleen Kaur   |       2 |  57000 | 2020-10-25 |
+|     38 | Vivek Menon    |       3 |  61000 | 2018-04-02 |
+|     40 | Roshan Kumar   |       5 |  74000 | 2017-11-11 |
+|     42 | Manoj Patil    |       2 |  65000 | 2020-09-19 |
+|     45 | Catherine Dias |       5 |  70000 | 2018-06-14 |
+|     47 | Sana Parvez    |       2 |  66000 | 2020-04-29 |
+|     50 | Bryan Lewis    |       5 |  76000 | 2017-08-08 |
++--------+----------------+---------+--------+------------+
+22 rows in set (0.00 sec)
+
+mysql> SELECT dept_id
+    -> FROM employees
+    -> WHERE salary = (SELECT MAX(salary) FROM employees);
++---------+
+| dept_id |
++---------+
+|       5 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE employees_backup AS
+    -> SELECT * FROM employees;
+Query OK, 50 rows affected (0.04 sec)
+Records: 50  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO employees VALUES
+    -> (101, 'Test User', 2, 50000, '2024-01-01');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM employees;
++--------+--------------------+---------+--------+------------+
+| emp_id | emp_name           | dept_id | salary | hire_date  |
++--------+--------------------+---------+--------+------------+
+|      1 | Amit Sharma        |       1 |  45000 | 2021-06-12 |
+|      2 | Riya Mehta         |       2 |  60000 | 2020-03-21 |
+|      3 | Arjun Patel        |       3 |  75000 | 2019-09-15 |
+|      4 | Priya Singh        |       2 |  52000 | 2022-01-11 |
+|      5 | Rahul Gupta        |       3 |  30000 | 2023-04-10 |
+|      6 | Anil Johnson       |       4 |  48000 | 2021-12-09 |
+|      7 | Sneha Kaur         |       1 |  38000 | 2020-07-07 |
+|      8 | Alex Wilson        |       5 |  67000 | 2018-02-20 |
+|      9 | John Mathew        |       2 |  55000 | 2020-10-01 |
+|     10 | Sonali Samson      |       4 |  43000 | 2023-05-24 |
+|     11 | Meera Nair         |       1 |  42000 | 2021-02-18 |
+|     12 | Vikas Pandey       |       2 |  61000 | 2020-05-30 |
+|     13 | Shreya Kulkarni    |       3 |  47000 | 2022-03-19 |
+|     14 | Rohan Desai        |       4 |  39000 | 2021-08-11 |
+|     15 | Kunal Thakur       |       5 |  72000 | 2019-11-09 |
+|     16 | Monika Rana        |       1 |  51000 | 2022-07-20 |
+|     17 | Suresh Rao         |       2 |  58000 | 2020-12-31 |
+|     18 | Deepak Mishra      |       3 |  68000 | 2018-10-05 |
+|     19 | Tina Kapoor        |       4 |  36000 | 2023-01-12 |
+|     20 | Sam Thomas         |       5 |  75000 | 2017-09-28 |
+|     21 | Nisha Jain         |       1 |  41000 | 2021-04-16 |
+|     22 | Farhan Khan        |       2 |  62000 | 2020-06-08 |
+|     23 | Devika Pillai      |       3 |  50000 | 2022-02-27 |
+|     24 | Harsh Vardhan      |       4 |  38000 | 2021-11-13 |
+|     25 | Lata More          |       5 |  69000 | 2019-05-14 |
+|     26 | Gaurav Singh       |       1 |  44000 | 2021-07-01 |
+|     27 | Ayesha Khan        |       2 |  63000 | 2020-08-17 |
+|     28 | Pratik Joshi       |       3 |  55000 | 2022-04-09 |
+|     29 | Kevin Dsouza       |       4 |  42000 | 2021-12-22 |
+|     30 | Diana Noronha      |       5 |  71000 | 2018-03-05 |
+|     31 | Sanjay Verma       |       1 |  47000 | 2020-09-10 |
+|     32 | Zoya Shaikh        |       2 |  64000 | 2020-11-29 |
+|     33 | Abhishek Jain      |       3 |  59000 | 2022-05-13 |
+|     34 | Chirag Shah        |       4 |  39000 | 2021-08-30 |
+|     35 | Reema Paul         |       5 |  68000 | 2019-10-18 |
+|     36 | Irfan Ali          |       1 |  53000 | 2022-03-01 |
+|     37 | Harleen Kaur       |       2 |  57000 | 2020-10-25 |
+|     38 | Vivek Menon        |       3 |  61000 | 2018-04-02 |
+|     39 | Juhi Chawla        |       4 |  40000 | 2023-02-19 |
+|     40 | Roshan Kumar       |       5 |  74000 | 2017-11-11 |
+|     41 | Pooja Sharma       |       1 |  46000 | 2021-05-21 |
+|     42 | Manoj Patil        |       2 |  65000 | 2020-09-19 |
+|     43 | Snehal Deshmukh    |       3 |  52000 | 2022-06-10 |
+|     44 | Arvind Shetty      |       4 |  41000 | 2021-01-28 |
+|     45 | Catherine Dias     |       5 |  70000 | 2018-06-14 |
+|     46 | Siddharth Malhotra |       1 |  48000 | 2021-03-12 |
+|     47 | Sana Parvez        |       2 |  66000 | 2020-04-29 |
+|     48 | Karan Gupta        |       3 |  54000 | 2022-07-03 |
+|     49 | Rashmi Rawat       |       4 |  37000 | 2023-03-22 |
+|     50 | Bryan Lewis        |       5 |  76000 | 2017-08-08 |
+|    101 | Test User          |       2 |  50000 | 2024-01-01 |
++--------+--------------------+---------+--------+------------+
+51 rows in set (0.00 sec)
+
+mysql> CREATE TABLE it_employees AS
+    -> SELECT * FROM employees WHERE dept_id = 2;
+Query OK, 12 rows affected (0.06 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM it_employees;
++--------+--------------+---------+--------+------------+
+| emp_id | emp_name     | dept_id | salary | hire_date  |
++--------+--------------+---------+--------+------------+
+|      2 | Riya Mehta   |       2 |  60000 | 2020-03-21 |
+|      4 | Priya Singh  |       2 |  52000 | 2022-01-11 |
+|      9 | John Mathew  |       2 |  55000 | 2020-10-01 |
+|     12 | Vikas Pandey |       2 |  61000 | 2020-05-30 |
+|     17 | Suresh Rao   |       2 |  58000 | 2020-12-31 |
+|     22 | Farhan Khan  |       2 |  62000 | 2020-06-08 |
+|     27 | Ayesha Khan  |       2 |  63000 | 2020-08-17 |
+|     32 | Zoya Shaikh  |       2 |  64000 | 2020-11-29 |
+|     37 | Harleen Kaur |       2 |  57000 | 2020-10-25 |
+|     42 | Manoj Patil  |       2 |  65000 | 2020-09-19 |
+|     47 | Sana Parvez  |       2 |  66000 | 2020-04-29 |
+|    101 | Test User    |       2 |  50000 | 2024-01-01 |
++--------+--------------+---------+--------+------------+
+12 rows in set (0.00 sec)
+
+mysql> CREATE VIEW vw_high_salary AS
+    -> SELECT * FROM employees WHERE salary > 60000;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM vw_high_salary;
++--------+----------------+---------+--------+------------+
+| emp_id | emp_name       | dept_id | salary | hire_date  |
++--------+----------------+---------+--------+------------+
+|      3 | Arjun Patel    |       3 |  75000 | 2019-09-15 |
+|      8 | Alex Wilson    |       5 |  67000 | 2018-02-20 |
+|     12 | Vikas Pandey   |       2 |  61000 | 2020-05-30 |
+|     15 | Kunal Thakur   |       5 |  72000 | 2019-11-09 |
+|     18 | Deepak Mishra  |       3 |  68000 | 2018-10-05 |
+|     20 | Sam Thomas     |       5 |  75000 | 2017-09-28 |
+|     22 | Farhan Khan    |       2 |  62000 | 2020-06-08 |
+|     25 | Lata More      |       5 |  69000 | 2019-05-14 |
+|     27 | Ayesha Khan    |       2 |  63000 | 2020-08-17 |
+|     30 | Diana Noronha  |       5 |  71000 | 2018-03-05 |
+|     32 | Zoya Shaikh    |       2 |  64000 | 2020-11-29 |
+|     35 | Reema Paul     |       5 |  68000 | 2019-10-18 |
+|     38 | Vivek Menon    |       3 |  61000 | 2018-04-02 |
+|     40 | Roshan Kumar   |       5 |  74000 | 2017-11-11 |
+|     42 | Manoj Patil    |       2 |  65000 | 2020-09-19 |
+|     45 | Catherine Dias |       5 |  70000 | 2018-06-14 |
+|     47 | Sana Parvez    |       2 |  66000 | 2020-04-29 |
+|     50 | Bryan Lewis    |       5 |  76000 | 2017-08-08 |
++--------+----------------+---------+--------+------------+
+18 rows in set (0.00 sec)
+
+mysql> UPDATE vw_high_salary
+    -> SET salary = 80000
+    -> WHERE emp_id = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM vw_high_salary;
++--------+----------------+---------+--------+------------+
+| emp_id | emp_name       | dept_id | salary | hire_date  |
++--------+----------------+---------+--------+------------+
+|      3 | Arjun Patel    |       3 |  80000 | 2019-09-15 |
+|      8 | Alex Wilson    |       5 |  67000 | 2018-02-20 |
+|     12 | Vikas Pandey   |       2 |  61000 | 2020-05-30 |
+|     15 | Kunal Thakur   |       5 |  72000 | 2019-11-09 |
+|     18 | Deepak Mishra  |       3 |  68000 | 2018-10-05 |
+|     20 | Sam Thomas     |       5 |  75000 | 2017-09-28 |
+|     22 | Farhan Khan    |       2 |  62000 | 2020-06-08 |
+|     25 | Lata More      |       5 |  69000 | 2019-05-14 |
+|     27 | Ayesha Khan    |       2 |  63000 | 2020-08-17 |
+|     30 | Diana Noronha  |       5 |  71000 | 2018-03-05 |
+|     32 | Zoya Shaikh    |       2 |  64000 | 2020-11-29 |
+|     35 | Reema Paul     |       5 |  68000 | 2019-10-18 |
+|     38 | Vivek Menon    |       3 |  61000 | 2018-04-02 |
+|     40 | Roshan Kumar   |       5 |  74000 | 2017-11-11 |
+|     42 | Manoj Patil    |       2 |  65000 | 2020-09-19 |
+|     45 | Catherine Dias |       5 |  70000 | 2018-06-14 |
+|     47 | Sana Parvez    |       2 |  66000 | 2020-04-29 |
+|     50 | Bryan Lewis    |       5 |  76000 | 2017-08-08 |
++--------+----------------+---------+--------+------------+
+18 rows in set (0.00 sec)
+
+mysql> CREATE INDEX idx_emp_name ON employees(emp_name);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> CREATE INDEX idx_dept_salary ON employees(dept_id, salary);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DROP INDEX idx_emp_name ON employees;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+mysql>
